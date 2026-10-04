@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DocuVerity AI — evidence-grounded document investigation with source citations, conflict detection and uncertainty handling.">
+    <title>DocuVerity AI — Evidence Intelligence</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <header class="topbar">
+        <a class="brand" href="#top" aria-label="DocuVerity AI home">
+            <span class="brand-symbol">D</span>
+            <span class="brand-copy">
+                <strong>DocuVerity AI</strong>
+                <small>Evidence Intelligence Platform</small>
+            </span>
+        </a>
+
+        <div class="top-actions">
+            <span id="engineStatus" class="engine-status offline">
+                <span class="status-dot"></span>
+                Connecting to local AI
+            </span>
+            <span class="security-chip">Local-first · Private workspace</span>
+        </div>
+    </header>
+
+    <main id="top" class="page-shell">
+        <section class="hero-grid">
+            <div class="hero-copy">
+                <div class="eyebrow-pill"><span></span> MULTI-DOCUMENT INVESTIGATION</div>
+                <h1>Find the answer.<br><em>Show the evidence.</em></h1>
+                <p class="hero-lede">
+                    Investigate information across documents with grounded answers,
+                    precise source references, contradiction detection and honest uncertainty.
+                </p>
+
+                <div class="hero-stats">
+                    <div><strong>03</strong><span>Core formats</span></div>
+                    <div><strong>04</strong><span>Evidence layers</span></div>
+                    <div><strong>01</strong><span>Investigation flow</span></div>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="orbit orbit-a"></div>
+                <div class="orbit orbit-b"></div>
+                <div class="scan-ring"></div>
+                <div class="glass-document back-doc">
+                    <span class="mini-line long"></span><span class="mini-line"></span><span class="mini-line medium"></span>
+                </div>
+                <div class="glass-document mid-doc">
+                    <span class="doc-topline"></span>
+                    <span class="mini-line long"></span><span class="mini-line medium"></span><span class="mini-line"></span>
+                    <span class="mini-chart"></span>
+                </div>
+                <div class="glass-document front-doc">
+                    <div class="doc-logo">D</div>
+                    <span class="doc-title">EVIDENCE</span>
+                    <span class="mini-line long"></span><span class="mini-line"></span><span class="mini-line medium"></span>
+                    <div class="proof-stamp">VERIFIED</div>
+                </div>
+                <div class="floating-tag tag-top">SOURCE GROUNDING</div>
+                <div class="floating-tag tag-bottom">CONFLICT AWARE</div>
+            </div>
+        </section>
+
+        <section class="workspace-grid">
+            <aside class="left-rail">
+                <div class="rail-card">
+                    <div class="rail-heading">
+                        <div>
+                            <span class="micro-label">01 · EVIDENCE SET</span>
+                            <h2>Documents</h2>
+                        </div>
+                        <span id="documentCount" class="number-badge">0</span>
+                    </div>
+
+                    <label class="dropzone" id="dropzone" for="fileInput">
+                        <input id="fileInput" type="file" accept=".pdf,.docx,.txt" multiple hidden>
+                        <span class="drop-icon">+</span>
+                        <strong>Drop evidence here</strong>
+                        <small>or click to browse · PDF, DOCX, TXT</small>
+                    </label>
+
+                    <div class="library-toolbar">
+                        <input id="documentSearch" type="search" placeholder="Search evidence..." autocomplete="off">
+                        <button id="selectAllButton" type="button" class="ghost-button">Select all</button>
+                    </div>
+
+                    <div id="documentList" class="document-list">
+                        <div class="empty-library">
+                            <span>⌁</span>
+                            <strong>No evidence loaded</strong>
+                            <small>Upload two documents with different claims to test conflict detection.</small>
+                        </div>
+                    </div>
+
+                    <button id="clearWorkspaceButton" class="danger-outline" type="button">Clear workspace</button>
+                </div>
+
+                <div class="rail-card architecture-card">
+                    <span class="micro-label">PIPELINE</span>
+                    <div class="pipeline-step"><b>01</b><span>Extract text</span><i>→</i></div>
+                    <div class="pipeline-step"><b>02</b><span>Retrieve evidence</span><i>→</i></div>
+                    <div class="pipeline-step"><b>03</b><span>Compare claims</span><i>→</i></div>
+                    <div class="pipeline-step active"><b>04</b><span>Explain the result</span><i>✓</i></div>
+                </div>
+            </aside>
+
+            <section class="main-column">
+                <div class="investigator-card">
+                    <div class="section-headline">
+                        <div>
+                            <span class="micro-label">02 · INVESTIGATION</span>
+                            <h2>Ask a question about the evidence</h2>
+                        </div>
+                        <span id="selectionLabel" class="selection-chip">All documents</span>
+                    </div>
+
+                    <div class="question-box">
+                        <textarea id="questionInput" rows="4" maxlength="2000" placeholder="Example: Is the applicant eligible based on the requirements in these documents?"></textarea>
+                        <button id="investigateButton" class="investigate-button" type="button">
+                            <span>Investigate</span><b>↗</b>
+                        </button>
+                    </div>
+
+                    <div class="suggestion-row">
+                        <span>Suggested investigations</span>
+                        <button type="button" class="suggestion">What is this document about?</button>
+                        <button type="button" class="suggestion">What requirements are stated?</button>
+                        <button type="button" class="suggestion">What claims conflict?</button>
+                    </div>
+                </div>
+
+                <div id="loadingState" class="loading-card hidden">
+                    <div class="loading-orbit"><span></span></div>
+                    <div><strong>Investigating your evidence</strong><small>Retrieving relevant passages and checking source consistency…</small></div>
+                </div>
+
+                <section id="resultSection" class="result-section hidden">
+                    <div class="result-header">
+                        <div>
+                            <span class="micro-label">03 · INVESTIGATION RESULT</span>
+                            <h2 id="resultTitle">Evidence assessment</h2>
+                        </div>
+                        <div id="verdictBadge" class="verdict-badge">—</div>
+                    </div>
+
+                    <div class="result-hero-card">
+                        <div class="result-hero-label"><span class="result-icon">✦</span> EVIDENCE-BASED CONCLUSION</div>
+                        <p id="answerText">—</p>
+                    </div>
+
+                    <div class="result-two-column">
+                        <article class="result-card">
+                            <div class="card-title"><span>04</span><div><small>KEY FINDINGS</small><h3>What the evidence shows</h3></div></div>
+                            <div id="findingsList" class="findings-list"></div>
+                        </article>
+
+                        <article class="result-card confidence-card">
+                            <div class="card-title"><span>05</span><div><small>CONFIDENCE</small><h3>Evidence strength</h3></div></div>
+                            <div class="confidence-value"><strong id="confidenceValue">0%</strong><span id="confidenceLabel">Low</span></div>
+                            <div class="confidence-track"><div id="confidenceBar" class="confidence-bar"></div></div>
+                            <p>Confidence reflects the quality and completeness of retrieved evidence—not facts beyond the uploaded documents.</p>
+                        </article>
+                    </div>
+
+                    <article id="conflictPanel" class="conflict-card hidden">
+                        <div class="conflict-title"><span class="alert-icon">!</span><div><small>CONFLICT ALERT</small><h3>These claims need review</h3></div></div>
+                        <div id="conflictList" class="conflict-list"></div>
+                    </article>
+
+                    <article class="sources-card">
+                        <div class="card-title"><span>06</span><div><small>SOURCE EVIDENCE</small><h3>Where the conclusion came from</h3></div></div>
+                        <div id="sourcesList" class="sources-list"></div>
+                    </article>
+                </section>
+
+                <section class="history-card">
+                    <div class="section-headline compact">
+                        <div><span class="micro-label">07 · HISTORY</span><h2>Recent investigations</h2></div>
+                    </div>
+                    <div id="historyList" class="history-list"><div class="history-empty">Your recent investigations will appear here.</div></div>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <div id="toast" class="toast hidden"><span class="toast-dot"></span><span id="toastMessage"></span></div>
+    <script src="app.js"></script>
+</body>
+</html>

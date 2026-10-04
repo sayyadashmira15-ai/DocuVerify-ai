@@ -1,0 +1,26 @@
+DOCUVERITY AI — START HERE
+
+1. Extract this ZIP.
+2. Open the extracted DocuVerity-AI-Complete folder in VS Code.
+3. Open Terminal → New Terminal.
+4. Run:
+   python -m pip install -r requirements.txt
+5. Make sure Ollama is running and check:
+   ollama list
+6. Required models:
+   llama3:latest
+   nomic-embed-text:latest
+7. If nomic-embed-text is missing:
+   ollama pull nomic-embed-text
+8. Start the app:
+   python -m uvicorn backend.main:app --reload --port 8010
+9. Open ONLY this URL in your browser:
+   http://127.0.0.1:8010
+
+Do NOT use VS Code Live Preview / Live Server for this project.
+FastAPI serves the frontend and API together.
+
+Quick conflict demo:
+Upload demo_income_rules.txt and demo_college_circular.txt.
+Ask: What is the annual income limit?
+The app should surface a possible conflict and the LLM should verify whether the claims refer to the same fact.
